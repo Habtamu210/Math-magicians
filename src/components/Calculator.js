@@ -1,227 +1,50 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import calculate from '../logic/calculate';
 
-class Calculator extends React.Component {
-  constructor(props) {
-    super(props);
-    this.Compute = this.Compute.bind(this);
-    this.updateScreen = this.updateScreen.bind(this);
-  }
-
-  Compute = (obj, button) => {
-    const { updateState } = this.props;
-    const newObj = calculate(obj, button);
-    updateState(newObj);
+function Calculator() {
+  const [result, setResult] = useState({
+    total: null,
+    next: null,
+    operation: null,
+  });
+  const handleClick = (buttonName) => {
+    setResult(calculate(result, buttonName));
   };
-
-  updateScreen = () => {
-    const { calculatorData } = this.props;
-
-    const { total, next, operation } = calculatorData;
-
-    if (total === null && next === null) {
-      return 0;
-    }
-    if (next !== null && total === null) {
-      return next;
-    }
-    if (total !== null && next !== null) {
-      if (operation !== null && operation !== undefined) {
-        return `${total} ${operation} ${next}`;
-      }
-      return total;
-    }
-    return total;
-  };
-
-  render() {
-    const { calculatorData } = this.props;
-    return (
-      <div className="container">
-        <div className="keys screen">
-          {this.updateScreen()}
-        </div>
-        <button
-          type="button"
-          className="keys"
-          onClick={() => {
-            this.Compute(calculatorData, 'AC');
-          }}
-        >
-          AC
-        </button>
-        <button
-          type="button"
-          className="keys"
-          onClick={() => {
-            this.Compute(calculatorData, '+/-');
-          }}
-        >
-          +/-
-        </button>
-        <button
-          type="button"
-          className="keys"
-          onClick={() => {
-            this.Compute(calculatorData, '%');
-          }}
-        >
-          %
-        </button>
-        <button
-          type="button"
-          className="keys operators"
-          onClick={() => {
-            this.Compute(calculatorData, '÷');
-          }}
-        >
-          ÷
-        </button>
-        <button
-          type="button"
-          className="keys "
-          onClick={() => {
-            this.Compute(calculatorData, '7');
-          }}
-        >
-          7
-        </button>
-        <button
-          type="button"
-          className="keys"
-          onClick={() => {
-            this.Compute(calculatorData, '8');
-          }}
-        >
-          8
-        </button>
-        <button
-          type="button"
-          className="keys"
-          onClick={() => {
-            this.Compute(calculatorData, '9');
-          }}
-        >
-          9
-        </button>
-        <button
-          type="button"
-          className="keys operators"
-          onClick={() => {
-            this.Compute(calculatorData, 'x');
-          }}
-        >
-          x
-        </button>
-        <button
-          type="button"
-          className="keys"
-          onClick={() => {
-            this.Compute(calculatorData, '4');
-          }}
-        >
-          4
-        </button>
-        <button
-          type="button"
-          className="keys"
-          onClick={() => {
-            this.Compute(calculatorData, '5');
-          }}
-        >
-          5
-        </button>
-        <button
-          type="button"
-          className="keys"
-          onClick={() => {
-            this.Compute(calculatorData, '6');
-          }}
-        >
-          6
-        </button>
-        <button
-          type="button"
-          className="keys operators"
-          onClick={() => {
-            this.Compute(calculatorData, '-');
-          }}
-        >
-          -
-        </button>
-        <button
-          type="button"
-          className="keys"
-          onClick={() => {
-            this.Compute(calculatorData, '1');
-          }}
-        >
-          1
-        </button>
-        <button
-          type="button"
-          className="keys"
-          onClick={() => {
-            this.Compute(calculatorData, '2');
-          }}
-        >
-          2
-        </button>
-        <button
-          type="button"
-          className="keys"
-          onClick={() => {
-            this.Compute(calculatorData, '3');
-          }}
-        >
-          3
-        </button>
-        <button
-          type="button"
-          className="keys operators"
-          onClick={() => {
-            this.Compute(calculatorData, '+');
-          }}
-        >
-          +
-        </button>
-        <button
-          type="button"
-          className="keys zero"
-          onClick={() => {
-            this.Compute(calculatorData, '0');
-          }}
-        >
-          0
-        </button>
-        <button
-          type="button"
-          className="keys"
-          onClick={() => {
-            this.Compute(calculatorData, '.');
-          }}
-        >
-          .
-        </button>
-        <button
-          type="button"
-          className="keys operators"
-          onClick={() => {
-            this.Compute(calculatorData, '=');
-          }}
-        >
-          =
-        </button>
+  return (
+    <div className="calc">
+      <div className="display">
+        <input type="text" value={result.next || result.total || '0'} />
+        <small>e</small>
       </div>
-    );
-  }
-}
+      <div className="buttons">
 
-Calculator.propTypes = {
-  updateState: PropTypes.func.isRequired,
-  /* eslint-disable-next-line react/forbid-prop-types */
-  calculatorData: PropTypes.object.isRequired,
-};
+        <button className="button" type="button" onClick={() => handleClick('AC')}>AC</button>
+        <button className="button" type="button" onClick={() => handleClick('+/-')}>+/-</button>
+        <button className="button" type="button" onClick={() => handleClick('%')}>%</button>
+        <button className="button" type="button" onClick={() => handleClick('÷')}>÷</button>
+
+        <button className="button" type="button" onClick={() => handleClick('7')}>7</button>
+        <button className="button" type="button" onClick={() => handleClick('8')}>8</button>
+        <button className="button" type="button" onClick={() => handleClick('9')}>9</button>
+        <button className="button" type="button" onClick={() => handleClick('x')}>x</button>
+
+        <button className="button" type="button" onClick={() => handleClick('4')}>4</button>
+        <button className="button" type="button" onClick={() => handleClick('5')}>5</button>
+        <button className="button" type="button" onClick={() => handleClick('6')}>6</button>
+        <button className="button" type="button" onClick={() => handleClick('-')}>-</button>
+
+        <button className="button" type="button" onClick={() => handleClick('1')}>1</button>
+        <button className="button" type="button" onClick={() => handleClick('2')}>2</button>
+        <button className="button" type="button" onClick={() => handleClick('3')}>3</button>
+        <button className="button" type="button" onClick={() => handleClick('+')}>+</button>
+
+        <button className="button" type="button" onClick={() => handleClick('0')}>0</button>
+        <button className="button" type="button" onClick={() => handleClick('.')}>.</button>
+        <button className="button" type="button" onClick={() => handleClick('=')}>=</button>
+
+      </div>
+    </div>
+  );
+}
 
 export default Calculator;
