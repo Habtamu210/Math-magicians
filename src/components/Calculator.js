@@ -1,49 +1,45 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import calculate from '../logic/calculate';
 
 function Calculator() {
-  const [result, setResult] = useState({
-    total: null,
-    next: null,
-    operation: null,
+  const [dataCalc, calcHelper] = useState({
+    total: '',
+    next: '',
+    operation: '',
   });
-  const handleClick = (buttonName) => {
-    setResult(calculate(result, buttonName));
+
+  const inputCalc = (event) => {
+    calcHelper(calculate(dataCalc, event.target.textContent));
   };
+
   return (
-    <div className="calc">
-      <div className="display">
-        <input type="text" value={result.next || result.total || '0'} />
-        <small>e</small>
+    <section className="main-container calc-main-container">
+      <h2 className="title-calculator">Let&apos;s do some math!</h2>
+      <div className="calculator-container">
+        <input className="calc-total" type="text" value={dataCalc.next || dataCalc.total || '0'} />
+        <div className="calc-buttons-container">
+          <button type="button" className="calc-button" onClick={inputCalc}>AC</button>
+          <button type="button" className="calc-button" onClick={inputCalc}>+/-</button>
+          <button type="button" className="calc-button" onClick={inputCalc}>%</button>
+          <button type="button" className="calc-button" onClick={inputCalc}>÷</button>
+          <button type="button" className="calc-button" onClick={inputCalc}>7</button>
+          <button type="button" className="calc-button" onClick={inputCalc}>8</button>
+          <button type="button" className="calc-button" onClick={inputCalc}>9</button>
+          <button type="button" className="calc-button" onClick={inputCalc}>x</button>
+          <button type="button" className="calc-button" onClick={inputCalc}>4</button>
+          <button type="button" className="calc-button" onClick={inputCalc}>5</button>
+          <button type="button" className="calc-button" onClick={inputCalc}>6</button>
+          <button type="button" className="calc-button" onClick={inputCalc}>-</button>
+          <button type="button" className="calc-button" onClick={inputCalc}>1</button>
+          <button type="button" className="calc-button" onClick={inputCalc}>2</button>
+          <button type="button" className="calc-button" onClick={inputCalc}>3</button>
+          <button type="button" className="calc-button" onClick={inputCalc}>+</button>
+          <button type="button" className="calc-button" onClick={inputCalc}>0</button>
+          <button type="button" className="calc-button" onClick={inputCalc}>.</button>
+          <button type="button" className="calc-button" onClick={inputCalc}>=</button>
+        </div>
       </div>
-      <div className="buttons">
-
-        <button className="button" type="button" onClick={() => handleClick('AC')}>AC</button>
-        <button className="button" type="button" onClick={() => handleClick('+/-')}>+/-</button>
-        <button className="button" type="button" onClick={() => handleClick('%')}>%</button>
-        <button className="button" type="button" onClick={() => handleClick('÷')}>÷</button>
-
-        <button className="button" type="button" onClick={() => handleClick('7')}>7</button>
-        <button className="button" type="button" onClick={() => handleClick('8')}>8</button>
-        <button className="button" type="button" onClick={() => handleClick('9')}>9</button>
-        <button className="button" type="button" onClick={() => handleClick('x')}>x</button>
-
-        <button className="button" type="button" onClick={() => handleClick('4')}>4</button>
-        <button className="button" type="button" onClick={() => handleClick('5')}>5</button>
-        <button className="button" type="button" onClick={() => handleClick('6')}>6</button>
-        <button className="button" type="button" onClick={() => handleClick('-')}>-</button>
-
-        <button className="button" type="button" onClick={() => handleClick('1')}>1</button>
-        <button className="button" type="button" onClick={() => handleClick('2')}>2</button>
-        <button className="button" type="button" onClick={() => handleClick('3')}>3</button>
-        <button className="button" type="button" onClick={() => handleClick('+')}>+</button>
-
-        <button className="button" type="button" onClick={() => handleClick('0')}>0</button>
-        <button className="button" type="button" onClick={() => handleClick('.')}>.</button>
-        <button className="button" type="button" onClick={() => handleClick('=')}>=</button>
-
-      </div>
-    </div>
+    </section>
   );
 }
 
