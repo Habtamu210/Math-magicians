@@ -1,8 +1,8 @@
 import React from 'react';
 
-const home = () => (
-  <div className="heading">
-    <h2 className="sub-title">Wellcome To Our Page</h2>
+const Home = () => (
+  <section className="main-container">
+    <h2 className="title-home">Welcome to our page!</h2>
     <p>
       Welcome to my calculator website! this is a calculator website developed using html,class
       and javascript which can compute an mathimatical operators. so you can add, divide, multiplay
@@ -13,7 +13,7 @@ const home = () => (
       arithmetic to complex equations, my calculator has the capabilities to help you
       solve any problem quickly and accurately.
     </p>
-  </div>
+  </section>
 );
 
-export default home;
+export default Home;

@@ -1,23 +1,29 @@
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Calculator from './components/Calculator';
-import Navigation from './components/navagation';
 import Home from './components/home';
 import Quote from './components/quote';
-import Default from './components/default';
+import NavBar from './components/NavBar';
 
-function App() {
-  return (
-    <BrowserRouter>
-      <Navigation />
-      <Routes>
-        <Route element={<div className="back-page" />} />
-        <Route path="/mathmatica" element={<Home />} />
-        <Route path="/calculator" element={<Calculator />} />
-        <Route path="/quote" element={<Quote />} />
-        <Route path="*" element={<Default />} />
-      </Routes>
-    </BrowserRouter>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    return (
+      <BrowserRouter>
+        <NavBar />
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/math-magician" element={<Home />} />
+          <Route path="/calculator" element={<Calculator />} />
+          <Route path="/quote" element={<Quote />} />
+        </Routes>
+      </BrowserRouter>
+    );
+  }
 }
 
 export default App;
